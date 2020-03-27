@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <div id="container">
+      <button id="Rock">Rock</button>
+      <button id="Paper">Paper</button>
+      <button id="Scissors">Scissors</button>
+    </div>
+
+    <script type="text/javascript">
+
+      const container = document.querySelector("#container");
+      const result = document.createElement("div");
+
+      container.appendChild(result);
+
+      function computerPlay() {
+        let play = ["Rock", "Paper", "Scissors"];
+        let randomIndex = Math.floor(Math.random()*play.length);
+
+        return play[randomIndex];
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        let playerSelection1 = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()
+
+        switch (playerSelection1) {
+          case "Rock":
+            if (computerSelection === "Scissors") {
+              playerScore++;
+              result.textContent = `You Win!. ${playerSelection} beats ${computerSelection}`;
+              return result.textContent;
+            }
+            else if (computerSelection === "Paper") {
+              computerScore++;
+              result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+              return result.textContent;
+            }
+            else {
+              result.textContent = "It's a tie. Try again";
+              return result.textContent;
+            }
+            break;
+
+          case "Paper":
+            if (computerSelection === "Rock") {
+              playerScore++;
+              result.textContent = `You Win!. ${playerSelection} beats ${computerSelection}`;
+              return result.textContent;
+            }
+            else if (computerSelection === "Scissors") {
+              computerScore++;
+              result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+              return result.textContent;
+            }
+            else {
+              result.textContent = "It's a tie. Try again";
+              return result.textContent;
+            }
+            break;
+
+          case "Scissors":
+            if (computerSelection === "Paper") {
+              playerScore++;
+              result.textContent = `You Win!. ${playerSelection} beats ${computerSelection}`;
+              return result.textContent;
+            }
+            else if (computerSelection === "Rock") {
+              computerScore++;
+              result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+              return result.textContent;
+            }
+            else {
+              result.textContent = "It's a tie. Try again";
+              return result.textContent;
+            }
+            break;
+          default:
+            result.textContent = "Unknown input. Not part of the rules.";
+            return result.textContent;
+            break;
+        }
+      }
+
+      function playGame(playerSelection) {
+        const computerSelection = computerPlay();
+
+        result.textContent = `Game: \n${playRound(playerSelection, computerSelection)}`;
+        return result.textContent;
+      }
+
+      let playerScore = 0;
+      let computerScore = 0;
+      const buttons = document.querySelectorAll("button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          playGame(button.id);
+        });
+      });
+
+
+    </script>
+  </body>
+</html>
